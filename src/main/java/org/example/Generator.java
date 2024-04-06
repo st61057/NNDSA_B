@@ -13,4 +13,9 @@ public class Generator {
     public int priorityGenerator() {
         return random.nextInt();
     }
+
+    public char keyGenerator() {
+        return (char)(random.nextInt(26) + 'a');
+    }
+
 }

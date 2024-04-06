@@ -1,7 +1,5 @@
 package org.example;
 
-import java.util.Iterator;
-
 public abstract class AbstractTreap<K extends Comparable<K>, P extends Comparable<P>, V> {
 
     protected class TreapNode {
@@ -66,15 +64,11 @@ public abstract class AbstractTreap<K extends Comparable<K>, P extends Comparabl
 
     TreapNode root;
 
-    public AbstractTreap() {
-        this.root = new TreapNode();
-    }
-
-    public boolean isEmpty() {
+    private boolean isEmpty() {
         return root == null;
     }
 
-    public TreapNode leftRotate(TreapNode node) {
+    private TreapNode leftRotate(TreapNode node) {
         TreapNode rightChildNode = node.right;
         TreapNode rightsChildChildNode = rightChildNode.left;
 
@@ -84,7 +78,7 @@ public abstract class AbstractTreap<K extends Comparable<K>, P extends Comparabl
         return rightChildNode;
     }
 
-    public TreapNode rightRotate(TreapNode node) {
+    private TreapNode rightRotate(TreapNode node) {
         TreapNode leftChildNode = node.left;
         TreapNode leftsChildChildNode = leftChildNode.right;
 
@@ -94,48 +88,99 @@ public abstract class AbstractTreap<K extends Comparable<K>, P extends Comparabl
         return leftChildNode;
     }
 
-    public TreapNode insert(K key, TreapNode newNode) {
-        if (isEmpty()) {
-            return new TreapNode(key, null, newNode.getValue());
-        }
-
-        if (key.compareTo(newNode.key) <= 0) {
-            newNode.left = insert(key, newNode.left);
-
-            if (newNode.left.priority.compareTo(newNode.priority) > 0) {
-                newNode = rightRotate(newNode);
-            }
-        } else {
-            newNode.right = insert(key, newNode.right);
-
-            if (newNode.right.priority.compareTo(newNode.priority) > 0) {
-                newNode = leftRotate(newNode);
-            }
-        }
-        return newNode;
+    public void insert(K key, P priority, V value) {
+        root = insert(key, priority, value, root);
     }
 
-    public TreapNode deleteNode(K key, TreapNode node) {
-        if (node == null) {
+    private TreapNode insert(K key, P priority, V value, TreapNode parent) {
+        if (parent == null) {
+            return new TreapNode(key, priority, value);
+        }
+
+        if (key.compareTo(parent.key) < 0) {
+            parent.left = insert(key, priority, value, parent.left);
+
+            if (parent.left.priority.compareTo(parent.priority) > 0) {
+                parent = rightRotate(parent);
+            }
+        } else {
+            parent.right = insert(key, priority, value, parent.right);
+
+            if (parent.right.priority.compareTo(parent.priority) > 0) {
+                parent = leftRotate(parent);
+            }
+        }
+        return parent;
+    }
+
+    public V delete(K key) {
+        if (isEmpty()) {
             return null;
         }
 
-        if (key.compareTo(node.key) < 0) {
-            node.left = deleteNode(key, node.left);
-        } else if (key.compareTo(node.key) > 0) {
-            node.right = deleteNode(key, node.right);
-        } else if (node.left == null) {
-            //hodí pravého potomka jako kořen
-            TreapNode temp = node.right;
-            node = temp;
-        } else if (node.left.priority.compareTo(node.right.priority) < 0) {
-            node = leftRotate(node);
-            node.left = deleteNode(key, node.left);
-        } else {
-            node = rightRotate(node);
-            node.right = deleteNode(key, node.right);
-        }
-        return node;
+        Tuple<TreapNode, V> deleted = delete(key, getRoot());
+        root = deleted.getFirst();
+        return deleted.getSecond();
     }
 
+    private Tuple<TreapNode, V> delete(K key, TreapNode node) {
+        if (node == null) {
+            return new Tuple<>(null, null);
+        }
+        V value = null;
+
+        if (key.compareTo(node.key) < 0) {
+            Tuple<TreapNode, V> tempToDel = delete(key, node.left);
+            node.left = tempToDel.getFirst();
+            value = tempToDel.getSecond();
+        } else if (key.compareTo(node.key) > 0) {
+            Tuple<TreapNode, V> tempToDel = delete(key, node.right);
+            node.right = tempToDel.getFirst();
+            value = tempToDel.getSecond();
+        } else {
+            value = node.getValue();
+            if (node.left == null) {
+                //hodí pravého potomka jako předka
+                node = node.right;
+            } else if (node.right == null) {
+                //ddto pro levého
+                node = node.left;
+            } else if (node.left.priority.compareTo(node.right.priority) < 0) {
+                node = leftRotate(node);
+                node.left = delete(key, node.left).getFirst();
+            } else {
+                node = rightRotate(node);
+                node.right = delete(key, node.right).getFirst();
+            }
+        }
+        return new Tuple<>(node, value);
+    }
+
+    public V search(K key) {
+        if (isEmpty()) {
+            return null;
+        }
+
+        TreapNode temp = getRoot();
+        return search(key, temp).getValue();
+    }
+
+    private TreapNode search(K key, TreapNode node) {
+
+        if (node == null) {
+            return null;
+        }
+        if (node.key.compareTo(key) == 0) {
+            return node;
+        }
+
+        if (node.key.compareTo(key) < 0) {
+            return search(key, node.right);
+        }
+        return search(key, node.left);
+    }
+
+    public TreapNode getRoot() {
+        return root;
+    }
 }
