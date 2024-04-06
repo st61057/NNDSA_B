@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import static java.lang.Math.max;
+
 public abstract class AbstractTreap<K extends Comparable<K>, P extends Comparable<P>, V> {
 
     protected class TreapNode {
@@ -118,6 +120,15 @@ public abstract class AbstractTreap<K extends Comparable<K>, P extends Comparabl
         return parent;
     }
 
+    public int findHeight() {
+        return findHeight(root);
+    }
+
+    private int findHeight(TreapNode node) {
+        if (node == null) return 0;
+        return 1 + max(findHeight(node.left), findHeight(node.right));
+    }
+
     public V delete(K key) {
         if (isEmpty()) {
             return null;
@@ -184,6 +195,7 @@ public abstract class AbstractTreap<K extends Comparable<K>, P extends Comparabl
         }
         return search(key, node.left);
     }
+
     public Iterator<Tuple<TreapNode, Integer>> levelOrderIterator() {
         Iterator<Tuple<TreapNode, Integer>> iterator = new Iterator() {
 
@@ -216,5 +228,9 @@ public abstract class AbstractTreap<K extends Comparable<K>, P extends Comparabl
 
     public TreapNode getRoot() {
         return root;
+    }
+
+    public void clean() {
+        root = null;
     }
 }

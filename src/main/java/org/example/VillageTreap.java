@@ -13,4 +13,8 @@ public class VillageTreap extends AbstractTreap<Character, Integer, String> {
         Integer priority = generator.priorityGenerator();
         insert(key, priority, villageName);
     }
+
+    public Generator getGenerator() {
+        return generator;
+    }
 }
