@@ -1,5 +1,10 @@
 package org.example;
 
+import javax.swing.tree.TreeNode;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
+
 public abstract class AbstractTreap<K extends Comparable<K>, P extends Comparable<P>, V> {
 
     protected class TreapNode {
@@ -178,6 +183,35 @@ public abstract class AbstractTreap<K extends Comparable<K>, P extends Comparabl
             return search(key, node.right);
         }
         return search(key, node.left);
+    }
+    public Iterator<Tuple<TreapNode, Integer>> levelOrderIterator() {
+        Iterator<Tuple<TreapNode, Integer>> iterator = new Iterator() {
+
+            Queue<Tuple<TreapNode, Integer>> queue = new LinkedList<>();
+
+            {
+                queue.add(new Tuple<>(getRoot(), 0));
+            }
+
+            @Override
+            public boolean hasNext() {
+                return !queue.isEmpty();
+            }
+
+            @Override
+            public Tuple<TreapNode, Integer> next() {
+                Tuple<TreapNode, Integer> current = queue.poll();
+                TreapNode currentNode = current.getFirst();
+                if (currentNode.left != null) {
+                    queue.add(new Tuple<>(currentNode.left, current.getSecond() + 1));
+                }
+                if (currentNode.right != null) {
+                    queue.add(new Tuple<>(currentNode.right, current.getSecond() + 1));
+                }
+                return current;
+            }
+        };
+        return iterator;
     }
 
     public TreapNode getRoot() {
