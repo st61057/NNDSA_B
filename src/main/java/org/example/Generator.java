@@ -2,11 +2,11 @@ package org.example;
 
 import java.util.Random;
 
-public class PriorityGenerator {
+public class Generator {
 
     Random random;
 
-    public PriorityGenerator(int seed) {
+    public Generator(int seed) {
         this.random = new Random(seed);
     }
 
