@@ -16,7 +16,6 @@ public class Statistics {
 
     public Integer max() {
         return Collections.max(dataList);
-
     }
 
     public Integer min() {
@@ -52,13 +51,5 @@ public class Statistics {
             current.add(actualNumber / i);
         }
         return current;
-    }
-
-    public void writeToFile(String fileName) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-        writer.write("Max - " + max());
-        writer.write("Min - " + min());
-        writer.write("Mod - " + modus());
-        writer.write("Mod - " + cumulative_average());
     }
 }

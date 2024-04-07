@@ -104,17 +104,17 @@ public abstract class AbstractTreap<K extends Comparable<K>, P extends Comparabl
             return new TreapNode(key, priority, value);
         }
 
-        if (key.compareTo(parent.key) < 0) {
-            parent.left = insert(key, priority, value, parent.left);
-
-            if (parent.left.priority.compareTo(parent.priority) > 0) {
-                parent = rightRotate(parent);
-            }
-        } else {
+        if (key.compareTo(parent.key) > 0) {
             parent.right = insert(key, priority, value, parent.right);
 
-            if (parent.right.priority.compareTo(parent.priority) > 0) {
+            if (parent.right.priority.compareTo(parent.priority) < 0) {
                 parent = leftRotate(parent);
+            }
+        } else {
+            parent.left = insert(key, priority, value, parent.left);
+
+            if (parent.left.priority.compareTo(parent.priority) < 0) {
+                parent = rightRotate(parent);
             }
         }
         return parent;
@@ -161,7 +161,7 @@ public abstract class AbstractTreap<K extends Comparable<K>, P extends Comparabl
             } else if (node.right == null) {
                 //ddto pro levého
                 node = node.left;
-            } else if (node.left.priority.compareTo(node.right.priority) < 0) {
+            } else if (node.left.priority.compareTo(node.right.priority) > 0) {
                 node = leftRotate(node);
                 node.left = delete(key, node.left).getFirst();
             } else {

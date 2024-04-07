@@ -39,10 +39,10 @@ public class OperationsTests {
         villageTreap.insert('A', 99, "villageName7");
         villageTreap.insert('C', 79, "villageName7");
         villageTreap.insert('K', 70, "villageName7");
-        villageTreap.insert('K', 72, "villageName7");
+        villageTreap.insert('P', 72, "villageName7");
         System.out.println(print(villageTreap));
         System.out.println("-----");
-        villageTreap.delete('C');
+        villageTreap.delete('G');
         System.out.println(print(villageTreap));
     }
 }
