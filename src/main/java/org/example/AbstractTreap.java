@@ -172,30 +172,6 @@ public abstract class AbstractTreap<K extends Comparable<K>, P extends Comparabl
         return new Tuple<>(node, value);
     }
 
-    public V search(K key) {
-        if (isEmpty()) {
-            return null;
-        }
-
-        TreapNode temp = getRoot();
-        return search(key, temp).getValue();
-    }
-
-    private TreapNode search(K key, TreapNode node) {
-
-        if (node == null) {
-            return null;
-        }
-        if (node.key.compareTo(key) == 0) {
-            return node;
-        }
-
-        if (node.key.compareTo(key) < 0) {
-            return search(key, node.right);
-        }
-        return search(key, node.left);
-    }
-
     public Iterator<Tuple<TreapNode, Integer>> levelOrderIterator() {
         Iterator<Tuple<TreapNode, Integer>> iterator = new Iterator() {
 
