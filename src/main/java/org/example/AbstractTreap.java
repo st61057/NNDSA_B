@@ -1,6 +1,5 @@
 package org.example;
 
-import javax.swing.tree.TreeNode;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -34,10 +33,6 @@ public abstract class AbstractTreap<K extends Comparable<K>, P extends Comparabl
 
         public P getPriority() {
             return priority;
-        }
-
-        public void setPriority(P priority) {
-            this.priority = priority;
         }
 
         public K getKey() {

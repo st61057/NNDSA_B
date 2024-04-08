@@ -29,22 +29,24 @@ public class Experiment {
             villageTreap.clean();
         }
         writer.write("\n");
-        writer.write("Statistics");
+        writer.write("Statistics\n");
         Statistics statistics = new Statistics(heights);
         writer.write("Max - " + statistics.max() + "\n");
         writer.write("Min - " + statistics.min() + "\n");
-        writer.write("Mod [ " + "\n");
+        writer.write("Mod [ ");
         List<Integer> modusList = statistics.modus();
         for (int i = 0; i < modusList.size(); i++) {
-            writer.write(modusList.get(i) + "\n");
+            writer.write(modusList.get(i) + ",");
         }
         writer.write("]\n");
         writer.write("Cumulative [ " + "\n");
         List<Double> cumulativeList = statistics.cumulative_average();
         for (int i = 0; i < cumulativeList.size(); i++) {
-            writer.write(cumulativeList.get(i) + "\n");
+            writer.write(String.format("%.7g",cumulativeList.get(i)) + "\n");
         }
         writer.write("]");
+        writer.flush();
+        writer.close();
 
     }
 }
