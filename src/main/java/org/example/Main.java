@@ -89,14 +89,14 @@ public class Main {
     public static String print(VillageTreap villageTreap) {
         int level = 0;
         StringBuilder sb = new StringBuilder();
-        HashMap<Character, Character> parentMap = new HashMap<>();
+        HashMap<Character, Tuple<Character, Character>> parentMap = new HashMap<>();
         for (Iterator<Tuple<AbstractTreap<Character, Integer, String>.TreapNode, Integer>> it = villageTreap.levelOrderIterator(); it.hasNext(); ) {
             Tuple<AbstractTreap<Character, Integer, String>.TreapNode, Integer> node = it.next();
             if (node.getFirst().getLeft() != null) {
-                parentMap.put(node.getFirst().getLeft().key, node.getFirst().getKey());
+                parentMap.put(node.getFirst().getLeft().key, new Tuple<>(node.getFirst().getKey(), 'L'));
             }
             if (node.getFirst().getRight() != null) {
-                parentMap.put(node.getFirst().getRight().key, node.getFirst().getKey());
+                parentMap.put(node.getFirst().getRight().key, new Tuple<>(node.getFirst().getKey(), 'R'));
             }
 
             if (level != node.getSecond()) {
@@ -104,7 +104,7 @@ public class Main {
                 level = node.getSecond();
             }
             AbstractTreap.TreapNode currentNode = node.getFirst();
-            sb.append(currentNode.getKey() + ":" + currentNode.getPriority() + "(" + (parentMap.containsKey(currentNode.getKey()) ? parentMap.get(currentNode.getKey()) : "") + ") ");
+            sb.append(currentNode.getKey() + ":" + currentNode.getPriority() + "(Parent:" + (parentMap.containsKey(currentNode.getKey()) ? parentMap.get(currentNode.getKey()).getFirst() + " Side: " + parentMap.get(currentNode.getKey()).getSecond() : "") + ") ");
             if (!it.hasNext()) {
                 sb.append(" - level " + node.getSecond() + "\n");
             }
