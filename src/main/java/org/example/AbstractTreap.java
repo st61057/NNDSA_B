@@ -20,22 +20,6 @@ public abstract class AbstractTreap<K extends Comparable<K>, P extends Comparabl
         TreapNode left;
         TreapNode right;
 
-        public TreapNode() {
-            this.key = null;
-            this.priority = null;
-            this.value = null;
-            this.left = this;
-            this.right = this;
-        }
-
-        public TreapNode(K key, P priority, V value, TreapNode left, TreapNode right) {
-            this.key = key;
-            this.priority = priority;
-            this.value = value;
-            this.left = left;
-            this.right = right;
-        }
-
         public TreapNode(K key, P priority, V value) {
             this.key = key;
             this.priority = priority;
