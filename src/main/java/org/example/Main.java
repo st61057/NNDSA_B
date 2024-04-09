@@ -9,7 +9,7 @@ public class Main {
         Loader loader = new Loader();
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Zvolte operaci");
+        System.out.println("Dostupné operace");
         System.out.println("1 - Vložení pomocí zvoleného jména, nahodného klíče a priority");
         System.out.println("2 - Vložení pomocí zvoleného jména, klíče a priority");
         System.out.println("3 - Odebrání prvku pomocí klíče");
@@ -19,6 +19,7 @@ public class Main {
         System.out.println("0 - Ukončit");
         boolean end = false;
         while (!end) {
+            System.out.println("Zvolte operaci");
             switch (sc.next()) {
                 case "1": {
                     System.out.print("Zadejte jméno vesnice: ");
