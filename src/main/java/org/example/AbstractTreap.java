@@ -6,7 +6,7 @@ import java.util.Queue;
 
 import static java.lang.Math.max;
 
-public abstract class AbstractTreap<K extends Comparable<K>, P extends Comparable<P>, V> {
+public class AbstractTreap<K extends Comparable<K>, P extends Comparable<P>, V> {
 
     protected class TreapNode {
 
@@ -50,6 +50,15 @@ public abstract class AbstractTreap<K extends Comparable<K>, P extends Comparabl
 
     TreapNode root;
 
+    IGenerator<P> priorityGenerator;
+
+    public AbstractTreap() {
+    }
+
+    public AbstractTreap(IGenerator<P> priorityGenerator) {
+        this.priorityGenerator = priorityGenerator;
+    }
+
     private boolean isEmpty() {
         return root == null;
     }
@@ -75,6 +84,11 @@ public abstract class AbstractTreap<K extends Comparable<K>, P extends Comparabl
     }
 
     public void insert(K key, P priority, V value) {
+        root = insert(key, priority, value, root);
+    }
+
+    public void insert(K key, V value) {
+        P priority = priorityGenerator.priorityGenerator();
         root = insert(key, priority, value, root);
     }
 
@@ -149,6 +163,30 @@ public abstract class AbstractTreap<K extends Comparable<K>, P extends Comparabl
             }
         }
         return new Tuple<>(node, value);
+    }
+
+    public V search(K key) {
+        if (isEmpty()) {
+            return null;
+        }
+
+        TreapNode temp = getRoot();
+        return search(key, temp).getValue();
+    }
+
+    private TreapNode search(K key, TreapNode node) {
+
+        if (node == null) {
+            return null;
+        }
+        if (node.key.compareTo(key) == 0) {
+            return node;
+        }
+
+        if (node.key.compareTo(key) < 0) {
+            return search(key, node.right);
+        }
+        return search(key, node.left);
     }
 
     public Iterator<Tuple<TreapNode, Integer>> levelOrderIterator() {

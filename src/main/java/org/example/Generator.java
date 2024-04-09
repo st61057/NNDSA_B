@@ -2,7 +2,7 @@ package org.example;
 
 import java.util.Random;
 
-public class Generator {
+public class Generator implements IGenerator<Integer> {
 
     Random random;
 
@@ -10,12 +10,9 @@ public class Generator {
         this.random = new Random(seed);
     }
 
-    public int priorityGenerator() {
+    @Override
+    public Integer priorityGenerator() {
         return random.nextInt();
-    }
-
-    public char keyGenerator() {
-        return (char)(random.nextInt(26) + 'a');
     }
 
 }

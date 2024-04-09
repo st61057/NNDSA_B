@@ -1,3 +1,4 @@
+import org.example.Generator;
 import org.example.Statistics;
 import org.example.VillageTreap;
 import org.junit.Test;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public class Experiment {
 
-    VillageTreap villageTreap = new VillageTreap(144);
+    VillageTreap villageTreap = new VillageTreap(new Generator(144));
 
     @Test
     public void test() throws IOException {
@@ -21,7 +22,7 @@ public class Experiment {
             for (int i = 0; i < 1023; i++) {
                 String name = "villageName" + i;
                 writer.write(name + "\n");
-                villageTreap.insertVillage(name);
+                villageTreap.insertVillage(name, name);
             }
             int height = villageTreap.findHeight();
             writer.write("Height - " + height + "\n");
@@ -42,7 +43,7 @@ public class Experiment {
         writer.write("Cumulative [ " + "\n");
         List<Double> cumulativeList = statistics.cumulative_average();
         for (int i = 0; i < cumulativeList.size(); i++) {
-            writer.write(String.format("%.7g",cumulativeList.get(i)) + "\n");
+            writer.write(String.format("%.7g", cumulativeList.get(i)) + "\n");
         }
         writer.write("]");
         writer.flush();

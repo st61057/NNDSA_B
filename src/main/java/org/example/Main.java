@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        VillageTreap villageTreap = new VillageTreap(144);
+        VillageTreap villageTreap = new VillageTreap(new Generator(144));
         Loader loader = new Loader();
         Scanner sc = new Scanner(System.in);
 
@@ -22,8 +22,11 @@ public class Main {
             System.out.println("Zvolte operaci");
             switch (sc.next()) {
                 case "1": {
+                    System.out.println("Zadejte klíč");
+                    String key = sc.next();
                     System.out.print("Zadejte jméno vesnice: ");
-                    villageTreap.insertVillage(sc.next());
+                    String name = sc.next();
+                    villageTreap.insertVillage(key, name);
                     System.out.println("Vloženo");
                     break;
                 }
@@ -31,7 +34,7 @@ public class Main {
                     System.out.print("Zadejte jméno vesnice: ");
                     String name = sc.next();
                     System.out.print("Zadejte klíč: ");
-                    Character key = sc.next().charAt(0);
+                    String key = sc.next();
                     System.out.print("Zadejte prioritu: ");
                     Integer priority = Integer.valueOf(sc.next());
                     villageTreap.insert(key, priority, name);
@@ -45,7 +48,7 @@ public class Main {
                         System.out.println("Neplatný klíč! musí být jeden znak");
                         break;
                     }
-                    villageTreap.delete(input.charAt(0));
+                    villageTreap.delete(input);
                     System.out.println("Odebráno");
                     break;
                 }
@@ -90,9 +93,9 @@ public class Main {
     public static String print(VillageTreap villageTreap) {
         int level = 0;
         StringBuilder sb = new StringBuilder();
-        HashMap<Character, Tuple<Character, String>> parentMap = new HashMap<>();
-        for (Iterator<Tuple<AbstractTreap<Character, Integer, String>.TreapNode, Integer>> it = villageTreap.levelOrderIterator(); it.hasNext(); ) {
-            Tuple<AbstractTreap<Character, Integer, String>.TreapNode, Integer> node = it.next();
+        HashMap<String, Tuple<String, String>> parentMap = new HashMap<>();
+        for (Iterator<Tuple<AbstractTreap<String, Integer, String>.TreapNode, Integer>> it = villageTreap.levelOrderIterator(); it.hasNext(); ) {
+            Tuple<AbstractTreap<String, Integer, String>.TreapNode, Integer> node = it.next();
             if (node.getFirst().getLeft() != null) {
                 parentMap.put(node.getFirst().getLeft().key, new Tuple<>(node.getFirst().getKey(), "Left"));
             }
