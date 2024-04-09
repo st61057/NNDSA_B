@@ -2,7 +2,7 @@ package org.example;
 
 import java.util.Iterator;
 
-public class VillageTreap extends AbstractTreap<String, Integer, String> {
+public class VillageTreap {
 
     AbstractTreap<String, Integer, String> treap;
 
@@ -29,8 +29,7 @@ public class VillageTreap extends AbstractTreap<String, Integer, String> {
         throw new RuntimeException("klíč neexistuje");
     }
 
-    @Override
     public Iterator<Tuple<AbstractTreap<String, Integer, String>.TreapNode, Integer>> levelOrderIterator() {
-        return super.levelOrderIterator();
+        return treap.levelOrderIterator();
     }
 }
