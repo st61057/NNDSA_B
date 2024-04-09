@@ -171,7 +171,11 @@ public class AbstractTreap<K extends Comparable<K>, P extends Comparable<P>, V> 
         }
 
         TreapNode temp = getRoot();
-        return search(key, temp).getValue();
+        TreapNode result = search(key, temp);
+        if (result == null) {
+            return null;
+        }
+        return result.getValue();
     }
 
     private TreapNode search(K key, TreapNode node) {

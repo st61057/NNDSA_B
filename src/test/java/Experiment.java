@@ -24,10 +24,10 @@ public class Experiment {
                 writer.write(name + "\n");
                 villageTreap.insertVillage(name, name);
             }
-            int height = villageTreap.findHeight();
+            int height = villageTreap.height();
             writer.write("Height - " + height + "\n");
             heights.add(height);
-            villageTreap.clean();
+            villageTreap.cleanTree();
         }
         writer.write("\n");
         writer.write("Statistics\n");

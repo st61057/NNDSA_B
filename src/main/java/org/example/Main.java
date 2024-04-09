@@ -35,9 +35,7 @@ public class Main {
                     String name = sc.next();
                     System.out.print("Zadejte klíč: ");
                     String key = sc.next();
-                    System.out.print("Zadejte prioritu: ");
-                    Integer priority = Integer.valueOf(sc.next());
-                    villageTreap.insert(key, priority, name);
+                    villageTreap.insertVillage(key, name);
                     System.out.println("Vloženo");
                     break;
                 }
@@ -48,7 +46,7 @@ public class Main {
                         System.out.println("Neplatný klíč! musí být jeden znak");
                         break;
                     }
-                    villageTreap.delete(input);
+                    villageTreap.deleteVillage(input);
                     System.out.println("Odebráno");
                     break;
                 }

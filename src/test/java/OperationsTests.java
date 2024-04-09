@@ -9,41 +9,62 @@ public class OperationsTests {
 
     @Test
     public void insertTest() {
-        villageTreap.insert("G", 4, "villageName1");
-        villageTreap.insert("B", 7, "villageName2");
-        villageTreap.insert("H", 5, "villageName3");
-        villageTreap.insert("A", 10, "villageName4");
-        villageTreap.insert("E", 23, "villageName5");
-        villageTreap.insert("K", 65, "villageName6");
-        villageTreap.insert("I", 73, "villageName7");
+        villageTreap.insertVillage("G", "villageName1");
+        villageTreap.insertVillage("B", "villageName2");
+        villageTreap.insertVillage("H", "villageName3");
+        villageTreap.insertVillage("A", "villageName4");
+        villageTreap.insertVillage("E", "villageName5");
+        villageTreap.insertVillage("K", "villageName6");
+        villageTreap.insertVillage("I", "villageName7");
         System.out.println(print(villageTreap));
         System.out.println("-----");
-        villageTreap.insert("C", 25, "villageName8");
+        villageTreap.insertVillage("C", "villageName8");
         System.out.println(print(villageTreap));
         System.out.println("-----");
-        villageTreap.insert("D", 9, "villageName9");
+        villageTreap.insertVillage("D", "villageName9");
         System.out.println(print(villageTreap));
         System.out.println("-----");
-        villageTreap.insert("F", 2, "villageName10");
+        villageTreap.insertVillage("F", "villageName10");
+        System.out.println(print(villageTreap));
+    }
+
+    @Test
+    public void insertSpecifiedTest() {
+        villageTreap.insertSpecifiedVillage("G", 4, "villageName1");
+        villageTreap.insertSpecifiedVillage("B", 7, "villageName2");
+        villageTreap.insertSpecifiedVillage("H", 5, "villageName3");
+        villageTreap.insertSpecifiedVillage("A", 10, "villageName4");
+        villageTreap.insertSpecifiedVillage("E", 23, "villageName5");
+        villageTreap.insertSpecifiedVillage("K", 65, "villageName6");
+        villageTreap.insertSpecifiedVillage("I", 73, "villageName7");
+        System.out.println(print(villageTreap));
+        System.out.println("-----");
+        villageTreap.insertSpecifiedVillage("C", 25, "villageName8");
+        System.out.println(print(villageTreap));
+        System.out.println("-----");
+        villageTreap.insertSpecifiedVillage("D", 9, "villageName9");
+        System.out.println(print(villageTreap));
+        System.out.println("-----");
+        villageTreap.insertSpecifiedVillage("F", 2, "villageName10");
         System.out.println(print(villageTreap));
     }
 
     @Test
     public void deleteTest() {
-        villageTreap.insert("G", 40, "villageName1");
-        villageTreap.insert("E", 69, "villageName2");
-        villageTreap.insert("X", 50, "villageName3");
-        villageTreap.insert("B", 77, "villageName4");
-        villageTreap.insert("F", 84, "villageName5");
-        villageTreap.insert("M", 67, "villageName6");
-        villageTreap.insert("Z", 90, "villageName7");
-        villageTreap.insert("A", 99, "villageName7");
-        villageTreap.insert("C", 79, "villageName7");
-        villageTreap.insert("K", 70, "villageName7");
-        villageTreap.insert("P", 72, "villageName7");
+        villageTreap.insertVillage("G", "villageName1");
+        villageTreap.insertVillage("E", "villageName2");
+        villageTreap.insertVillage("X", "villageName3");
+        villageTreap.insertVillage("B", "villageName4");
+        villageTreap.insertVillage("F", "villageName5");
+        villageTreap.insertVillage("M", "villageName6");
+        villageTreap.insertVillage("Z", "villageName7");
+        villageTreap.insertVillage("A", "villageName7");
+        villageTreap.insertVillage("C", "villageName7");
+        villageTreap.insertVillage("K", "villageName7");
+        villageTreap.insertVillage("P", "villageName7");
         System.out.println(print(villageTreap));
         System.out.println("-----");
-        villageTreap.delete("G");
+        villageTreap.deleteVillage("G");
         System.out.println(print(villageTreap));
     }
 }

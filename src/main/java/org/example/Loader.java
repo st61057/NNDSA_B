@@ -10,7 +10,8 @@ public class Loader {
         String line;
         while ((line = reader.readLine()) != null) {
             String[] parsedRecord = line.split(",");
-            villageTreap.insert(parsedRecord[0], Integer.valueOf(parsedRecord[1]), parsedRecord[2]);
+//            villageTreap.insertVillage(parsedRecord[0], Integer.valueOf(parsedRecord[1]), parsedRecord[2]);
+            villageTreap.insertVillage(parsedRecord[0], parsedRecord[2]);
         }
     }
 
@@ -20,10 +21,10 @@ public class Loader {
         for (Iterator<Tuple<AbstractTreap<String, Integer, String>.TreapNode, Integer>> it = villageTreap.levelOrderIterator(); it.hasNext(); ) {
             Tuple<AbstractTreap<String, Integer, String>.TreapNode, Integer> node = it.next();
             AbstractTreap.TreapNode currentNode = node.getFirst();
-            writer.write(currentNode.getKey() + "," + currentNode.getPriority() + "," + currentNode.getValue().toString()+ "\n");
+            writer.write(currentNode.getKey() + "," + currentNode.getPriority() + "," + currentNode.getValue().toString() + "\n");
         }
         if (full) {
-            int height = villageTreap.findHeight();
+            int height = villageTreap.height();
             Statistics statistics = new Statistics(Arrays.asList(height));
             writer.write("Max - " + statistics.max());
             writer.write("Min - " + statistics.min());

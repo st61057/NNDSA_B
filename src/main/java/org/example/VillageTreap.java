@@ -18,6 +18,13 @@ public class VillageTreap {
         treap.insert(key, villageName);
     }
 
+    public void insertSpecifiedVillage(String key, Integer priority, String villageName) {
+        if (doesKeyExist(key)) {
+            throw new RuntimeException("Tento klíč již existuje");
+        }
+        treap.insert(key, priority, villageName);
+    }
+
     public boolean doesKeyExist(String key) {
         return treap.search(key) != null;
     }
@@ -31,5 +38,13 @@ public class VillageTreap {
 
     public Iterator<Tuple<AbstractTreap<String, Integer, String>.TreapNode, Integer>> levelOrderIterator() {
         return treap.levelOrderIterator();
+    }
+
+    public Integer height() {
+        return treap.findHeight();
+    }
+
+    public void cleanTree() {
+        treap.clean();
     }
 }
