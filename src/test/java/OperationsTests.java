@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.example.Main.print;
 
 public class OperationsTests {
-    VillageTreap villageTreap = new VillageTreap(new Generator(144));
+    VillageTreap villageTreap = new VillageTreap(new Generator());
 
     @Test
     public void insertTest() {

@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        VillageTreap villageTreap = new VillageTreap(new Generator(144));
+        VillageTreap villageTreap = new VillageTreap(new Generator());
         Loader loader = new Loader();
         Scanner sc = new Scanner(System.in);
 

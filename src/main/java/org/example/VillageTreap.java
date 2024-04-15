@@ -25,7 +25,7 @@ public class VillageTreap {
         treap.insert(key, priority, villageName);
     }
 
-    public boolean doesKeyExist(String key) {
+    private boolean doesKeyExist(String key) {
         return treap.search(key) != null;
     }
 

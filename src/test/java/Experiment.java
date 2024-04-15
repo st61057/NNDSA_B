@@ -11,14 +11,13 @@ import java.util.List;
 
 public class Experiment {
 
-    VillageTreap villageTreap = new VillageTreap(new Generator(144));
-
     @Test
     public void test() throws IOException {
         String fileName = "test.txt";
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
         List<Integer> heights = new ArrayList<>();
         for (int j = 0; j < 10000; j++) {
+            VillageTreap villageTreap = new VillageTreap(new Generator());
             for (int i = 0; i < 1023; i++) {
                 String name = "villageName" + i;
                 writer.write(name + "\n");
@@ -27,7 +26,6 @@ public class Experiment {
             int height = villageTreap.height();
             writer.write("Height - " + height + "\n");
             heights.add(height);
-            villageTreap.cleanTree();
         }
         writer.write("\n");
         writer.write("Statistics\n");

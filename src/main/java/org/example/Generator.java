@@ -6,8 +6,8 @@ public class Generator implements IGenerator<Integer> {
 
     Random random;
 
-    public Generator(int seed) {
-        this.random = new Random(seed);
+    public Generator() {
+        this.random = new Random((int) (10000 * Math.random()));
     }
 
     @Override
