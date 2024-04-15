@@ -10,7 +10,7 @@ public class Loader {
         String line;
         while ((line = reader.readLine()) != null) {
             String[] parsedRecord = line.split(",");
-//            villageTreap.insertVillage(parsedRecord[0], Integer.valueOf(parsedRecord[1]), parsedRecord[2]);
+//            villageTreap.insertSpecifiedVillage(parsedRecord[0], Integer.valueOf(parsedRecord[1]), parsedRecord[2]);
             villageTreap.insertVillage(parsedRecord[0], parsedRecord[2]);
         }
     }
