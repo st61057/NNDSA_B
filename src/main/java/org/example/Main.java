@@ -11,7 +11,7 @@ public class Main {
 
         System.out.println("Dostupné operace");
         System.out.println("1 - Vložení pomocí zvoleného jména, nahodného klíče a priority");
-        System.out.println("2 - Vložení pomocí zvoleného jména, klíče a priority");
+        System.out.println("2 - Vložení pomocí zvoleného jména, klíče a priority - pro test");
         System.out.println("3 - Odebrání prvku pomocí klíče");
         System.out.println("4 - Výpis stromu");
         System.out.println("5 - Export stromu do souboru");
@@ -35,7 +35,9 @@ public class Main {
                     String name = sc.next();
                     System.out.print("Zadejte klíč: ");
                     String key = sc.next();
-                    villageTreap.insertVillage(key, name);
+                    System.out.println("Priorita");
+                    String priority = sc.next();
+                    villageTreap.insertSpecifiedVillage(key, Integer.valueOf(priority), name);
                     System.out.println("Vloženo");
                     break;
                 }

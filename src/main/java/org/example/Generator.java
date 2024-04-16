@@ -12,7 +12,7 @@ public class Generator implements IGenerator<Integer> {
 
     @Override
     public Integer priorityGenerator() {
-        return random.nextInt();
+        return random.nextInt(100000);
     }
 
 }
